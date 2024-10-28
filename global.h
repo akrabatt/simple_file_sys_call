@@ -1,6 +1,10 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
-#include "includes.h"
+
+#include "sys/types.h"
+//#include "includes.h"
+
+#define MAIN_BUFF_SIZE 1024
 
 extern int file_fd;   // дескриптор файла
 
@@ -10,12 +14,12 @@ extern char buff[MAIN_BUFF_SIZE];    // главный буффер для чт�
 extern ssize_t num_read;
 
 // текст для записи в первый файл
-const char* text_for_write;
+extern const char* text_for_write;
 // текст для записи в потоке
-const char* text_for_inline;
+extern const char* text_for_inline;
 
 // структура блокировки файла
-struct flock lock; 
+extern struct flock lock; 
 
 extern struct flock lock;   // структура блокировки
 

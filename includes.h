@@ -1,5 +1,5 @@
-#ifndef GLOBAL_H
-#define GLOBAL_H
+#ifndef INCLUDES_H 
+#define INCLUDES_H
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -12,4 +12,4 @@
 #include "fun.h"
 
 
-#endif // GLOBAL_H
+#endif // INCLUDES_H
