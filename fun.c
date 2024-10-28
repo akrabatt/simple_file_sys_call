@@ -1,6 +1,8 @@
 #include "includes.h"
 
-
+/**
+ * @brief создаем файл и записываем в него стартовую фразу
+ */
 void create_file_and_write(int argc, char* argv[])
 {
     // проверяем введены ли 1 файл
@@ -14,3 +16,14 @@ void create_file_and_write(int argc, char* argv[])
     // закрываем файл
     close(file_fd);
 }
+
+
+/**
+ * @brief функция по блокировки/разблокировки файла
+ */
+void lock_unlock_file(int argc, char* argv[])
+{
+    char choice;
+    printf("\nWhat needs to be done with the file?\n1 - lock file\n2 - unlock file\n...: ");
+}
+

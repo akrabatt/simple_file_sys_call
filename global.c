@@ -10,7 +10,7 @@ char buff[MAIN_BUFF_SIZE];    // главный буффер для чтения
 ssize_t num_read;
 
 // текст для записи в первый файл
-const char* text_for_write = "Hello!\nMy n@me is Dima.\nThis's text for my test programm:-)\ndon't use it in work!\nbye!";
+const char* text_for_write = "Hello!\nMy n@me is Dima.\nThis's text for my test programm:-)\ndon't use it in work!\nbye!\n";
 // текст для записи во второй файл
 const char* text_for_inline = "!!!INLINE_TEXT!!!";
 
