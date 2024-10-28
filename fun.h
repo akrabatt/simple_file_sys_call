@@ -1,6 +1,8 @@
 #ifndef FUN_H
 #define FUN_H
 
+#include "includes.h"
+
 /**
  * @brief создаем файл и записываем в него стартовую фразу
  */

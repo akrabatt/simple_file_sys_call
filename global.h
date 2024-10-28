@@ -1,5 +1,6 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
+#include "includes.h"
 
 extern int file_fd;   // дескриптор файла
 

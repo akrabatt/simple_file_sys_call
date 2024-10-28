@@ -16,7 +16,4 @@ const char* text_for_inline = "!!!INLINE_TEXT!!!";
 
 // структура блокировки файлов
 struct flock lock;
-lock.l_type = F_WRLCK;  // установка блокировки на запись
-lock.l_whence = SEEK_SET; // начинаем с начала файла
-lock.l_start = 0;   // смещение на 0
-lock.l_len = 0;     // весь файл
+
