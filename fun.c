@@ -23,7 +23,25 @@ void create_file_and_write(int argc, char* argv[])
  */
 void lock_unlock_file(int argc, char* argv[])
 {
-    char choice;
-    printf("\nWhat needs to be done with the file?\n1 - lock file\n2 - unlock file\n...: ");
+    char choice; // переменная для хранения результата ввода
+    // вывод информации
+    printf("\nWhat needs to be done with the created file?\n1 - lock file\n2 - unlock file\n3 - try to write inline text to file\n4 - quit\n...: ");
+    // получаем информацию
+    choice = getchar();
+    // очищаем буффер ввода
+    // fflush(stdin);
+    while(getchar() != '\n');
+    
+    if(choice == '\n')
+    {
+        lock_unlock_file(argc, argv); 
+        return;
+    }
+    if((choice != '1') && (choice != '2') && (choice != '3') && (choice != '4'))
+    {
+        printf("\nInvalid value! Try again!\n"); 
+        lock_unlock_file(argc, argv);
+    }
+    else{printf("your choice: %c\n", choice);}
 }
 
