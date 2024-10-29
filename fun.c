@@ -55,7 +55,9 @@ void lock_unlock_file(int argc, char* argv[])
         case '1':
         {
             printf("...\nlocking file for write...\n"); 
-            if((file_fd = open(argv[1], O_WRONLY)) < 0){} 
+            if((file_fd = open(argv[1], O_WRONLY)) < 0){printf("Cant open file for write lock! : %s\n", strerror(errno)); exit(EXIT_FAILURE);} 
+            break;
+            
         }
     }
 }
