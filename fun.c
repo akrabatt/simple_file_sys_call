@@ -26,7 +26,8 @@ void lock_unlock_file(int argc, char* argv[])
     // подготовка переменных
     char choice; // переменная для хранения результата ввода
     // настраиваем структуру для блокировки
-    lock.l_type = F_WRLCK;
+    memset(&lock, 0, sizeof(lock));
+    //lock.l_type = F_WRLCK;
     lock.l_whence = SEEK_SET;
     lock.l_start = 0;
     lock.l_len = 0;
@@ -55,10 +56,35 @@ void lock_unlock_file(int argc, char* argv[])
         case '1':
         {
             printf("...\nlocking file for write...\n"); 
+            // открываем файл в режиме записи
             if((file_fd = open(argv[1], O_WRONLY)) < 0){printf("Cant open file for write lock! : %s\n", strerror(errno)); exit(EXIT_FAILURE);} 
+            
+            //memset(&lock, 0, sizeof(lock));
+            //lock.l_type = F_WRLCK;
+            // получаем информацию о текущем состоянии структуры блокировки файла
+            if(fcntl(file_fd, F_GETLK, &lock) < 0){printf("Cant get lock struct!\n"); lock_unlock_file(argc, argv); return;}
+
+            // проверка занятости блокировки
+            if((lock.l_type == 1) || (lock.l_type == 2)) 
+            {
+                printf("File is already locked by another process.\n");
+            } else {
+                lock.l_type = F_WRLCK; // Устанавливаем свою на запись
+                if(fcntl(file_fd, F_SETLK, &lock) < 0) {
+                    printf("Error: can't set lock on file! : %s\n", strerror(errno));
+                    close(file_fd);
+                    exit(EXIT_FAILURE);
+                }
+                printf("File locked successfully\n");
+            }
+            lock_unlock_file(argc, argv);
+            close(file_fd); // Правильное закрытие файла
+            return;
+        }
+
+            // блокируем файл
             break;
             
         }
     }
-}
 
