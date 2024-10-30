@@ -1,4 +1,5 @@
 #include "includes.h"
+#include <fcntl.h>
 
 /**
  * @brief создаем файл и записываем в него стартовую фразу
@@ -14,7 +15,7 @@ void create_file_and_write(int argc, char* argv[])
     // записываем строки в файл
     if(write(file_fd, text_for_write, strlen(text_for_write)) < 0){printf("Error write data to file %s\n", argv[1]); close(file_fd); exit(EXIT_FAILURE);}
     // закрываем файл
-    close(file_fd);
+    // close(file_fd);
 }
 
 
@@ -57,10 +58,8 @@ void lock_unlock_file(int argc, char* argv[])
         {
             printf("...\nlocking file for write...\n"); 
             // открываем файл в режиме записи
-            if((file_fd = open(argv[1], O_WRONLY)) < 0){printf("Cant open file for write lock! : %s\n", strerror(errno)); exit(EXIT_FAILURE);} 
+            // if((file_fd = open(argv[1], O_WRONLY)) < 0){printf("Cant open file for write lock! : %s\n", strerror(errno)); exit(EXIT_FAILURE);} 
             
-            //memset(&lock, 0, sizeof(lock));
-            //lock.l_type = F_WRLCK;
             // получаем информацию о текущем состоянии структуры блокировки файла
             if(fcntl(file_fd, F_GETLK, &lock) < 0){printf("Cant get lock struct!\n"); lock_unlock_file(argc, argv); return;}
 
@@ -84,7 +83,33 @@ void lock_unlock_file(int argc, char* argv[])
         }
         case '2':
         {
+            printf("...\nunlocking file...\n");
+            // проверяем заблокирован ли файл
+            if(fcntl(file_fd, F_GETLK, &lock) < 0){printf("Cant get lock struct!\n"); lock_unlock_file(argc, argv); return;}
 
+            if((lock.l_type == 1) || (lock.l_type == 2))
+            {
+                //lock.l_type = F_UNLCK;  // для разблокировки
+                memset(&lock, 0, sizeof(lock));
+                lock.l_type = F_UNLCK;
+                lock.l_whence = SEEK_SET;
+                lock.l_start = 0;
+                lock.l_len = 0;
+
+                if(fcntl(file_fd, F_SETLK, &lock) < 0) 
+                {
+                    printf("Error: can't unlock file! : %s\n", strerror(errno));
+                    close(file_fd);
+                    exit(EXIT_FAILURE);
+                }                                        
+                printf("unlocking done !\n");  
+                lock_unlock_file(argc, argv);
+                return;
+            } else {
+                printf("file is not locked !\n");
+                lock_unlock_file(argc, argv);
+                return;
+            }
         }
     }
 }
