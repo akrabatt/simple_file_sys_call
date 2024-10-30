@@ -23,4 +23,6 @@ extern struct flock lock;
 
 extern struct flock lock;   // структура блокировки
 
+extern int my_lock_flag;
+
 #endif // GLOBAL_H

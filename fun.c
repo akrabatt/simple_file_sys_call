@@ -53,7 +53,7 @@ void lock_unlock_file(int argc, char* argv[])
 
     switch(choice)
     {
-        case '1':
+        case '1':    // блокировать файл
         {
             printf("...\nlocking file for write...\n"); 
             // открываем файл в режиме записи
@@ -70,21 +70,22 @@ void lock_unlock_file(int argc, char* argv[])
                 printf("File is already locked by another process.\n");
             } else {
                 lock.l_type = F_WRLCK; // Устанавливаем свою на запись
-                if(fcntl(file_fd, F_SETLK, &lock) < 0) {
+                if(fcntl(file_fd, F_SETLK, &lock) < 0) 
+                {
                     printf("Error: can't set lock on file! : %s\n", strerror(errno));
                     close(file_fd);
                     exit(EXIT_FAILURE);
                 }
                 printf("File locked successfully\n");
             }
-            lock_unlock_file(argc, argv);
             close(file_fd); // Правильное закрытие файла
+            lock_unlock_file(argc, argv);
             return;
         }
+        case '2':
+        {
 
-            // блокируем файл
-            break;
-            
         }
     }
+}
 

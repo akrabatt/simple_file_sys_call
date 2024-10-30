@@ -17,3 +17,5 @@ const char* text_for_inline = "!!!INLINE_TEXT!!!";
 // структура блокировки файлов
 struct flock lock;
 
+int my_lock_flag = 0; // дополнительный флаг блокировки
+
