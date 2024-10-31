@@ -1,19 +1,16 @@
 #ifndef FUN_H
 #define FUN_H
 
-/**
- * @brief создаем файл и записываем в него стартовую фразу
- */
-void create_file_and_write(int argc, char* argv[]);
+void check_arguments(int argc, char* argv[]);
 
-/**
- * @brief функция по блокировки/разблокировки файла
- */
-void lock_unlock_file(int argc, char* argv[]);
+int open_file(const char* filename);
 
-/**
- * @brief функция по записи в файл
- */
-void write_inline_to_file(int argc, char* argv[]);
+int lock_file(int file_fd);
+
+int write_to_file(int file_fd, const char* text);
+
+int unlock_file(int file_fd);
+
+void close_file(int file_fd);
 
 #endif // FUN_H
