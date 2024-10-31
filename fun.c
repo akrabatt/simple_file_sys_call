@@ -32,6 +32,7 @@ void lock_unlock_file(int argc, char* argv[])
     lock.l_whence = SEEK_SET;
     lock.l_start = 0;
     lock.l_len = 0;
+    lock.l_pid = getpid();
 
     // вывод информации
     printf("\nWhat needs to be done with the created file?\n1 - lock file\n2 - unlock file\n3 - try to write inline text to file\n4 - quit\n...: ");
@@ -91,10 +92,11 @@ void lock_unlock_file(int argc, char* argv[])
             {
                 //lock.l_type = F_UNLCK;  // для разблокировки
                 memset(&lock, 0, sizeof(lock));
-                lock.l_type = F_UNLCK;
+                //lock.l_type = F_UNLCK;
                 lock.l_whence = SEEK_SET;
                 lock.l_start = 0;
                 lock.l_len = 0;
+                lock.l_pid = getpid();
 
                 if(fcntl(file_fd, F_SETLK, &lock) < 0) 
                 {
