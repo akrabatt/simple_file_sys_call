@@ -1,4 +1,6 @@
+#include "global.h"
 #include "includes.h"
+#include <stdio.h>
 
 /**
  * @brief создаем файл и НЕ закрываем его
@@ -42,6 +44,11 @@ void write_data(char* argv[])
     // разблокировака файла
     lock.l_type = F_UNLCK;
     printf("lock.l_type = %d\n", lock.l_type);
+    fflush(stdout);
     if((fcntl(file_fd, F_SETLK, &lock)) < 0){printf("Error, cant unlock file! : %s\n", strerror(errno)); close(file_fd); exit(EXIT_FAILURE);}
     else{printf("file unlocked!\n");}
+
+    close(file_fd);
+
+    printf("lock.l_type = %d\n", lock.l_type);
 }

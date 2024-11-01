@@ -10,7 +10,5 @@ int main(int argc, char* argv[])
     write_data(argv);
 
     // закрываем файл
-    if((close(file_fd)) < 0){printf("error close file!\n");}
-    else{printf("file closed!\n");}
     return EXIT_SUCCESS;
 }
