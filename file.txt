@@ -1,4 +1,0 @@
-Hello!
-This is text @12345
-Test text@#$%!!!
-bye!
