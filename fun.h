@@ -1,16 +1,15 @@
 #ifndef FUN_H
 #define FUN_H
 
-void check_arguments(int argc, char* argv[]);
+/**
+ * @brief создаем файл и НЕ закрываем его
+ */
+void create_file(int argc, char* argv[]);
 
-int open_file(const char* filename);
 
-int lock_file(int file_fd);
-
-int write_to_file(int file_fd, const char* text);
-
-int unlock_file(int file_fd);
-
-void close_file(int file_fd);
+/**
+ * @brief блокируем файл, записываем в него данные и разблокируем
+ */
+void write_data(char* argv[]);
 
 #endif // FUN_H
