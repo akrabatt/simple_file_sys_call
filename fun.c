@@ -44,8 +44,8 @@ void write_data()
     else{printf("file locked!\n");}
 
     // выполняем чтение из файла
-    bytes_read = read(file_fd, buf, sizeof(buf));
-    if(bytes_read < 0){printf("Error, read 1th file : %s\n", strerror(errno) - 1);}
+    bytes_read = read(file_fd, buf, sizeof(buf) - 1);
+    if(bytes_read < 0){printf("Error, read 1th file : %s\n", strerror(errno));}
 
     // выполняем запись в файл
     // ssize_t bytes_written = write(file_fd, text, strlen(text));
