@@ -10,6 +10,6 @@ void create_file(int argc, char* argv[]);
 /**
  * @brief блокируем файл, записываем в него данные и разблокируем
  */
-void write_data(char* argv[]);
+void write_data();
 
 #endif // FUN_H
