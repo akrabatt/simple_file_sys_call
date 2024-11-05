@@ -1,4 +1,3 @@
-#include "global.h"
 #include "includes.h"
 
 /**
@@ -52,10 +51,10 @@ void write_data()
     for(int i = 0; i < 1023; i++){if(buf[i] == 'z'){buf[i] = '.';}} 
 
     // выполняем запись в файл
-    // ssize_t bytes_written = write(file_fd, text, strlen(text));
+    ssize_t bytes_written = write(file_fd_2, buf, strlen(text));
     // выполняем проверку
-    // if(bytes_written < 0){printf("Error write text to file! : %s\n", strerror(errno)); close(file_fd); exit(EXIT_FAILURE);}
-    // else{printf("text written to file!\n");}
+    if(bytes_written < 0){printf("Error write text to file! : %s\n", strerror(errno)); close(file_fd); exit(EXIT_FAILURE);}
+    else{printf("text corrected and written to dst file!\n");}
 
     // разблокировака первого файла
     lock.l_type = F_UNLCK;
