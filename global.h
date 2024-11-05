@@ -9,4 +9,8 @@ extern const char* text;
 extern char buf[1024];
 extern ssize_t bytes_read;
 
+extern int flag;
+extern char sym_srch;
+extern char sym_trgt;
+
 #endif // GLOBAL_H

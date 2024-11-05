@@ -1,3 +1,4 @@
+#include "global.h"
 #include "includes.h"
 
 /**
@@ -47,8 +48,23 @@ void write_data()
     bytes_read = read(file_fd, buf, sizeof(buf) - 1);
     if(bytes_read < 0){printf("Error, read 1th file : %s\n", strerror(errno));}
 
+    // вывод исходного текста 
+    printf("\nSrc string: %s\n", buf);
+
+    // ввод пар-ров
+    printf("\nEnter the caharacter you want to change: ");
+    sym_srch = getchar();
+    while((getchar()) != '\n');
+
+    printf("\nEnter the caharacter you want to change to: ");
+    sym_trgt = getchar();
+    while((getchar()) != '\n');
+
     // форматируем текст
-    for(int i = 0; i < 1023; i++){if(buf[i] == 'z'){buf[i] = '.';}} 
+    for(int i = 0; i < 1023; i++){if(buf[i] == sym_srch){buf[i] = sym_trgt;}} 
+
+    // вывод форматированного текста
+    printf("\nTrgt string: %s\n", buf);
 
     // выполняем запись в файл
     ssize_t bytes_written = write(file_fd_2, buf, strlen(text));
