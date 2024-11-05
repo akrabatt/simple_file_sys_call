@@ -48,6 +48,9 @@ void write_data()
     bytes_read = read(file_fd, buf, sizeof(buf) - 1);
     if(bytes_read < 0){printf("Error, read 1th file : %s\n", strerror(errno));}
 
+    // форматируем текст
+    for(int i = 0; i < 1023; i++){if(buf[i] == 'z'){buf[i] = '.';}} 
+
     // выполняем запись в файл
     // ssize_t bytes_written = write(file_fd, text, strlen(text));
     // выполняем проверку
@@ -67,6 +70,5 @@ void write_data()
     // закрытие файлов
     close(file_fd);
     close(file_fd_2);
-
-    printf("lock.l_type = %d\n", lock.l_type);
+    printf("files closed!\n");
 }
